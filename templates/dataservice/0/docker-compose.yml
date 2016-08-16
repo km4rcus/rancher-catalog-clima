@@ -10,7 +10,7 @@ thredds:
    - "443:8443"
   volume_driver: convoy-nfs
   volumes:
-   - ${clima_data_volume}:/vault
+   - ${service_name}-data:/vault
 
 irods-rest:
   image: km4rcus/irods-rest:4.0.2.5-rc1
@@ -35,8 +35,8 @@ irods:
     PGPASSWORD: foobar
   volume_driver: convoy-nfs
   volumes:
-    - ${clima_config_volume}:/etc/irods 
-    - ${clima_data_volume}:/vault
+    - ${service_name}-config:/etc/irods 
+    - ${service_name}-data:/vault
 
 irods-db:
   image: postgres:9.4
@@ -44,4 +44,4 @@ irods-db:
     POSTGRES_PASSWORD: foobar
   volume_driver: convoy-nfs
   volumes:
-    - ${clima_db_volume}:/var/lib/postgresql
+    - ${service_name}-db:/var/lib/postgresql

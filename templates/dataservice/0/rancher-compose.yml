@@ -4,23 +4,10 @@
   description: "Deploy a Data Service based on iRODS,Solr and Thredds"
   minimum_rancher_version: v1.0.0
   questions:
-    - variable: clima_data_volume 
-      description: "Volume Name for Data"
-      label: "Data Volume"
+    - variable: service_name 
+      description: "Name for the service"
+      label: "Service Name"
       required: true
-      default: "data_volume"
-      type: "string"
-   - variable: clima_config_volume
-      description: "Volume Name for iRODS Configuration"
-      label: "Config Volume"
-      required: true
-      default: "config_volume"
-      type: "string"
-   - variable: clima_db_volume
-      description: "Volume Name for iRODS DB"
-      label: "DB Volume"
-      required: true
-      default: "db_volume"
+      default: "dataservice"
       type: "string"
 
-dataservice:
