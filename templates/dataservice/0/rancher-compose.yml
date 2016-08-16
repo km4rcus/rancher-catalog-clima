@@ -1,13 +1,14 @@
-.catalog:
-  name: "DataService"
-  version: latest-rancher1
+--- 
+.catalog: 
   description: "Deploy a Data Service based on iRODS,Solr and Thredds"
   minimum_rancher_version: v1.0.0
-  questions:
-    - variable: service_name 
+  name: DataService
+  questions: 
+    - 
+      default: dataservice
       description: "Name for the service"
       label: "Service Name"
       required: true
-      default: "dataservice"
-      type: "string"
-
+      type: string
+      variable: service_name
+  version: latest-rancher1
