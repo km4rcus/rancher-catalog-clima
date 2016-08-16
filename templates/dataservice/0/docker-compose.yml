@@ -1,0 +1,47 @@
+solr:
+  image: solr
+  ports:
+   - "8983:8983"
+ 
+thredds:
+  image: km4rcus/thredds
+  ports:
+   - "8180:8080"
+   - "443:8443"
+  volume_driver: convoy-nfs
+  volumes:
+   - ${clima_data_volume}:/vault
+
+irods-rest:
+  image: km4rcus/irods-rest:4.0.2.5-rc1
+  ports:
+   - "8080:8080"
+  links:
+   - irods
+
+irods:
+  image: km4rcus/icat:4.1.8 
+  container_name: irods
+  ports:
+   - "1247:1247"
+   - "20000-20199:20000-20199"
+  hostname: irods
+  command: irods
+  links:
+    - irods-db
+    - solr
+  environment:
+    RODS_PASSWORD: irods
+    PGPASSWORD: foobar
+  volume_driver: convoy-nfs
+  volumes:
+    - ${clima_config_volume}:/etc/irods 
+    - ${clima_data_volume}:/vault
+
+irods-db:
+  image: postgres:9.4
+  environment:
+    POSTGRES_PASSWORD: foobar
+  volume_driver: convoy-nfs
+  volumes:
+    - ${clima_db_volume}:/var/lib/postgresql
