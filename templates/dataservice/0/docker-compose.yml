@@ -33,6 +33,7 @@ irods:
   environment:
     RODS_PASSWORD: irods
     PGPASSWORD: foobar
+    ZONE: ${service_name}Zone
   volume_driver: convoy-nfs
   volumes:
     - ${service_name}-config:/etc/irods 
