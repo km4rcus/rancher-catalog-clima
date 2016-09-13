@@ -2,6 +2,8 @@ solr:
   image: solr
   ports:
    - "8983:8983"
+  labels:
+    io.rancher.scheduler.affinity:host_label: nodetype=backend
  
 thredds:
   image: km4rcus/thredds
@@ -11,6 +13,8 @@ thredds:
   volume_driver: convoy-nfs
   volumes:
    - ${service_name}-data:/vault
+  labels:
+    io.rancher.scheduler.affinity:host_label: nodetype=backend
 
 irods-rest:
   image: km4rcus/irods-rest:4.0.2.5-rc1
@@ -18,6 +22,8 @@ irods-rest:
    - "8080:8080"
   links:
    - irods
+  labels:
+    io.rancher.scheduler.affinity:host_label: nodetype=backend
 
 irods:
   image: km4rcus/icat:4.1.8 
@@ -38,6 +44,8 @@ irods:
   volumes:
     - ${service_name}-config:/etc/irods 
     - ${service_name}-data:/vault
+  labels:
+    io.rancher.scheduler.affinity:host_label: nodetype=backend
 
 irods-db:
   image: postgres:9.4
@@ -46,3 +54,5 @@ irods-db:
   volume_driver: convoy-nfs
   volumes:
     - ${service_name}-db:/var/lib/postgresql
+  labels:
+    io.rancher.scheduler.affinity:host_label: nodetype=backend
