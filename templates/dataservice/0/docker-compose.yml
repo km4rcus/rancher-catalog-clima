@@ -28,9 +28,9 @@ irods-rest:
 irods:
   image: km4rcus/icat:4.1.8 
   container_name: irods
-  expose:
-   - "1247"
-   - "20000-20199"
+  ports:
+   - "1247:1247"
+   - "20000-20199:20000-20199"
   hostname: irods
   command: irods
   links:
